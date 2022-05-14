@@ -15,6 +15,11 @@
     <description>banking</description>
     <properties>
         <java.version>18</java.version>
+        <flyway.user>root</flyway.user>
+        <flyway.password>tuddiroot</flyway.password>
+        <flyway.url>jdbc:mysql://localhost:3306/revolut</flyway.url>
+        <flyway.sqlMigrationPrefix>V</flyway.sqlMigrationPrefix>
+        <flyway.baselineVersion>1</flyway.baselineVersion>
     </properties>
     <dependencies>
         <dependency>
@@ -89,6 +94,11 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+            <version>8.5.10</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -112,6 +122,18 @@
                     <source>17</source>
                     <target>17</target>
                     <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.5.10</version>
+                <configuration>
+                    <user>${flyway.user}</user>
+                    <password>${flyway.password}</password>
+                    <url>${flyway.url}</url>
+                    <sqlMigrationPrefix>${flyway.sqlMigrationPrefix}</sqlMigrationPrefix>
+                    <baselineVersion>${flyway.baselineVersion}</baselineVersion>
                 </configuration>
             </plugin>
         </plugins>

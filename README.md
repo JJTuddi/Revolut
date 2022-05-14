@@ -21,7 +21,6 @@
  - Pot vedea incasarile pe o anumita luna
  - Sa pot seta praguri de cashback (procente) cu aplicatia
  - Sa pot urmari cheltuielile de profit (ex, tot cu aceasi aplicatie platesc curentul, gazul, salariile etc).
- - Sa-mi schimb procentul de cashback oferit.
  - Sa vad statistici legate despre venituri si cheltuieli si sa setez cheltuieli lunare catre alti furnizori, interni aplicatiei sau chiar externi.
 
 ### Ca si entitate financiara, as dori sa am contracte cu alte banci pentru a-mi permite extragerea de la ATM-urile lor cat si transfer bancar.
