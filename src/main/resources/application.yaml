@@ -1,13 +1,7 @@
 spring:
   datasource:
-    username: root
-    password: tuddiroot
-    url: jdbc:mysql://localhost:3306/revolut
     driver-class-name: com.mysql.cj.jdbc.Driver
   flyway:
-    user: root
-    password: tuddiroot
-    url: jdbc:mysql://localhost:3306/revolut
     locations: classpath:db/migration
     sql-migration-prefix: V
     baseline-version: 1
@@ -16,3 +10,31 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: none
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: alexandra
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/revolut
+  flyway:
+    user: root
+    url: jdbc:mysql://localhost:3306/revolut
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: tuddi
+  datasource:
+    username: root
+    password: tuddiroot
+    url: jdbc:mysql://localhost:3306/revolut
+  flyway:
+    user: root
+    password: tuddiroot
+    url: jdbc:mysql://localhost:3306/revolut
