@@ -1,4 +1,4 @@
-package com.app.banking.config.data;
+package com.app.banking.config.security.mongodb;
 
 
 import com.mongodb.ConnectionString;
