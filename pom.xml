@@ -16,7 +16,7 @@
     <properties>
         <java.version>18</java.version>
         <flyway.user>root</flyway.user>
-        <flyway.password>tuddiroot</flyway.password>
+        <flyway.password></flyway.password>
         <flyway.url>jdbc:mysql://localhost:3306/revolut</flyway.url>
         <flyway.sqlMigrationPrefix>V</flyway.sqlMigrationPrefix>
         <flyway.baselineVersion>1</flyway.baselineVersion>
