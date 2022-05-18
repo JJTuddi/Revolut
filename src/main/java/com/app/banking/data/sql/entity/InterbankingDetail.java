@@ -10,8 +10,8 @@ import java.util.Objects;
 @Table(name = "interbanking_details")
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class InterbankingDetail {
     @Id
