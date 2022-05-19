@@ -19,4 +19,5 @@ public class CardDto implements Serializable {
     private String cvv;
     private String number;
     private LocalDate expirationDate;
+    private CardStatusDto cardStatus;
 }

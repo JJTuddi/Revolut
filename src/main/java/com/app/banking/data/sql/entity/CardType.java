@@ -1,5 +1,6 @@
 package com.app.banking.data.sql.entity;
 
+import com.app.banking.data.sql.entity.enums.ECardType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +20,9 @@ public class CardType {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 16)
-    private String name;
+    private ECardType name;
 
     @Lob
     @Column(name = "description", nullable = false)
