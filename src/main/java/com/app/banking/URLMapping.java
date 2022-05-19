@@ -8,6 +8,7 @@ public class URLMapping {
     public static final String MY_CARDS = "/my_cards/{id}";
 
     public static final String DEPOSITS = API_PATH + "/deposits";
+    public static final String MY_DEPOSITS = "/my_deposits/{id}";
 
     public static final String ID = "/{id}";
 }

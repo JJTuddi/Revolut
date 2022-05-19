@@ -21,7 +21,7 @@ public class CardController {
     }
 
     @GetMapping(MY_CARDS)
-    public List<CardDto> allCardsByOwner(@PathVariable Long id){
+    public List<CardDto> allCardsByOwner(@PathVariable Integer id){
         return cardService.allCardsByOwner(id);
     }
 
@@ -31,12 +31,12 @@ public class CardController {
     }
 
     @PatchMapping(ID)
-    public CardDto update(@PathVariable Long id, @RequestBody CardDto card) {
+    public CardDto update(@PathVariable Integer id, @RequestBody CardDto card) {
         return cardService.update(id, card);
     }
 
     @DeleteMapping(ID)
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         cardService.delete(id);
     }
 

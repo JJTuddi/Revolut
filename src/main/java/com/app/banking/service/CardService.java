@@ -18,7 +18,7 @@ public class CardService {
     private final CardRepository cardRepository;
     private final CardMapper cardMapper;
 
-    public CardDto findById(Long id){       //TODO test
+    public CardDto findById(Integer id){       //TODO test
         return cardRepository.findById(id)      //TODO test
                 .map(cardMapper::cardToCardDto)
                 .orElseThrow(() -> new RuntimeException(format("Card with id %s not found", id)));
@@ -30,7 +30,7 @@ public class CardService {
                 .collect(Collectors.toList());
     }
 
-    public List<CardDto> allCardsByOwner(Long id){
+    public List<CardDto> allCardsByOwner(Integer id){
         return cardRepository.findAllByOwnerId(id).stream()
                 .map(cardMapper::cardToCardDto)
                 .collect(Collectors.toList());
@@ -42,14 +42,14 @@ public class CardService {
                         cardMapper.cardDtoToCard(cardDto)));
     }
 
-    public CardDto update(Long id, CardDto cardDto){
+    public CardDto update(Integer id, CardDto cardDto){
         Card cardEntity = cardMapper.cardDtoToCard(cardDto);
         cardEntity.setId(id);
 
        return cardMapper.cardToCardDto(cardRepository.save(cardEntity));
     }
 
-    public void delete(Long id){
+    public void delete(Integer id){
         cardRepository.deleteById(id);
     }
 }

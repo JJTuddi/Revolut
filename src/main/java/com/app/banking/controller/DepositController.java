@@ -1,4 +1,43 @@
 package com.app.banking.controller;
 
+import com.app.banking.data.dto.model.CardDto;
+import com.app.banking.data.dto.model.DepositDto;
+import com.app.banking.service.DepositService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.app.banking.URLMapping.*;
+
+@RestController
+@RequestMapping(DEPOSITS)
+@RequiredArgsConstructor
 public class DepositController {
+    private final DepositService depositService;
+
+    @GetMapping
+    public List<DepositDto> allCards(){
+        return depositService.findAll();
+    }
+
+    @GetMapping(MY_DEPOSITS)
+    public List<DepositDto> allCardsByOwner(@PathVariable Integer id){
+        return depositService.allDepositsByOwner(id);
+    }
+
+    @PostMapping
+    public DepositDto create(@RequestBody DepositDto deposit){
+        return depositService.addDeposit(deposit);
+    }
+
+    @PatchMapping(ID)
+    public DepositDto update(@PathVariable Integer id, @RequestBody DepositDto deposit) {
+        return depositService.update(id, deposit);
+    }
+
+    @DeleteMapping(ID)
+    public void delete(@PathVariable Integer id) {
+        depositService.delete(id);
+    }
 }
