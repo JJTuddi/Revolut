@@ -1,13 +1,10 @@
 package com.app.banking.data.sql.repo;
 
-import com.app.banking.data.sql.entity.UserEntity;
-import org.apache.catalina.User;
-import org.junit.jupiter.api.BeforeEach;
+import com.app.banking.data.sql.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.ActiveProfiles;
 
 import static com.app.banking.TestCreationFactory.randomDate;
 import static com.app.banking.TestCreationFactory.randomString;
@@ -31,7 +28,7 @@ public class UserRepositoryTest {
 
         String email = "email@employee.com";
         String password = "Abcdefg1234!";
-        UserEntity userSaved = repository.save(UserEntity.builder()
+        User userSaved = repository.save(User.builder()
                 .firstName(randomString())
                 .lastName(randomString())
                 .username(randomString())
@@ -44,7 +41,7 @@ public class UserRepositoryTest {
         assertNotNull(userSaved);
 
         assertThrows(DataIntegrityViolationException.class, () -> {
-            repository.save(UserEntity.builder()
+            repository.save(User.builder()
                     .firstName(randomString())
                     .lastName(randomString())
                     .username(randomString())
@@ -61,7 +58,7 @@ public class UserRepositoryTest {
         String username = randomString();
         String email = "email@employee.com";
         String password = "Abcdefg1234!";
-        UserEntity user = repository.save(UserEntity.builder()
+        User user = repository.save(User.builder()
                 .firstName(randomString())
                 .lastName(randomString())
                 .username(randomString())
