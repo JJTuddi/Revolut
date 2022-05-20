@@ -15,4 +15,7 @@ public class URLMapping {
     //users
     public static final String USERS = API_PATH +"/users";
 
+    //reports
+    public static final String REPORTS = API_PATH +"/reports";
+
 }

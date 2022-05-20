@@ -7,13 +7,14 @@ import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "card_status")
 public class CardStatus {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

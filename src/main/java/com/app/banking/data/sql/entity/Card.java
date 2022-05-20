@@ -29,7 +29,7 @@ public class Card {
     private CardType cardType;
 
     @Column(name = "currentAmount", nullable = false)
-    private Double currentAmount;
+    private Float currentAmount;
 
     @Column(name = "cvv", length = 3)
     private String cvv;

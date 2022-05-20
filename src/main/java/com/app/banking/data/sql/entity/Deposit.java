@@ -32,12 +32,12 @@ public class Deposit {
     private LocalDate createdOn;
 
     @Column(name = "currentAmount", nullable = false)
-    private Double currentAmount;
+    private Float currentAmount;
 
     @Column(name = "targetDate", nullable = false)
     private LocalDate targetDate;
 
     @Column(name = "targetAmount", nullable = false)
-    private Double targetAmount;
+    private Float targetAmount;
 
 }

@@ -19,7 +19,7 @@ public class CardService {
     private final CardMapper cardMapper;
 
     public CardDto findById(Integer id){       //TODO test
-        return cardRepository.findById(id)      //TODO test
+        return cardRepository.findById(id)
                 .map(cardMapper::cardToCardDto)
                 .orElseThrow(() -> new RuntimeException(format("Card with id %s not found", id)));
     }

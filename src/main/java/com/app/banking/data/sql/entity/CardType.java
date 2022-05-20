@@ -32,5 +32,5 @@ public class CardType {
     private Integer maxWithdrawal;
 
     @Column(name = "cashbackPercent", nullable = false)
-    private Double cashbackPercent;
+    private Float cashbackPercent;
 }

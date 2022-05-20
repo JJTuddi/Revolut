@@ -11,7 +11,7 @@ public class TestCreationFactory {
     public static String randomString() {
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
+        int targetStringLength = 12;
         Random random = new Random();
 
         return random.ints(leftLimit, rightLimit + 1)
@@ -29,5 +29,13 @@ public class TestCreationFactory {
                 .nextLong(startEpochDay, endEpochDay);
 
         return LocalDate.ofEpochDay(randomDay);
+    }
+
+    public static Float randomFloat(){
+        return new Random().nextFloat();
+    }
+
+    public static Integer randomInteger(){
+        return new Random().nextInt();
     }
 }

@@ -27,6 +27,6 @@ public class DepositType {
     private String description;
 
     @Column(name = "interestRate", nullable = false)
-    private Double interestRate;
+    private Float interestRate;
 
 }
