@@ -4,7 +4,7 @@ import com.app.banking.data.dto.model.CardDto;
 import com.app.banking.data.sql.entity.Card;
 import org.mapstruct.*;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+@Mapper(componentModel = "spring")
 public interface CardMapper {
     Card cardDtoToCard(CardDto cardDto);
 

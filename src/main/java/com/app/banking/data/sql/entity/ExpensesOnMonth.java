@@ -20,11 +20,11 @@ public class ExpensesOnMonth {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "ownerId", nullable = false)
     private Business owner;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "expenseId", nullable = false)
     private Expens expense;
 
@@ -32,6 +32,6 @@ public class ExpensesOnMonth {
     private LocalDate onDate;
 
     @Column(name = "currentValue", nullable = false)
-    private Double currentValue;
+    private Float currentValue;
 
 }

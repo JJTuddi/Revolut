@@ -26,7 +26,7 @@ public class Business {
     private String cif;
 
     @Column(name = "balance", nullable = false)
-    private Double balance;
+    private Float balance;
 
 
 }

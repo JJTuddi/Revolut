@@ -12,5 +12,5 @@ import java.io.Serializable;
 public class BusinessDto implements Serializable {
     private String name;
     private String cif;
-    private Double balance;
+    private Float balance;
 }

@@ -20,11 +20,11 @@ public class Card {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "ownerId", nullable = false)
     private User owner;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "cardTypeId", nullable = false)
     private CardType cardType;
 
@@ -40,7 +40,7 @@ public class Card {
     @Column(name = "expirationDate", nullable = false)
     private LocalDate expirationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "statusId", nullable = false)
     private CardStatus cardStatus;
 }

@@ -12,6 +12,6 @@ import java.io.Serializable;
 public class InterbankingDetailDto implements Serializable {
     private String bankName;
     private String ibanPrefix;
-    private Double feesToTransfer;
+    private Float feesToTransfer;
     private String endpointToCall;
 }

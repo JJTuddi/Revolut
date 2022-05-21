@@ -26,7 +26,7 @@ public class InterbankingDetail {
     private String ibanPrefix;
 
     @Column(name = "feesToTransfer", nullable = false)
-    private Double feesToTransfer;
+    private Float feesToTransfer;
 
     @Column(name = "endpointToCall", nullable = false, length = 128)
     private String endpointToCall;

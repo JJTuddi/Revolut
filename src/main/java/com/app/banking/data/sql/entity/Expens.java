@@ -23,6 +23,6 @@ public class Expens {
     private String name;
 
     @Column(name = "expectedAmount", nullable = false)
-    private Double expectedAmount;
+    private Float expectedAmount;
 
 }

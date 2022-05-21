@@ -25,7 +25,7 @@ public class CardController {
         return cardService.allCardsByOwner(id);
     }
 
-    @PostMapping
+    @PostMapping()
     public CardDto create(@RequestBody CardDto card){
         return cardService.addCard(card);
     }

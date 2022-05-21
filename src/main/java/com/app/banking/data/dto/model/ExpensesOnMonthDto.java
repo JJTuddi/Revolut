@@ -14,5 +14,5 @@ public class ExpensesOnMonthDto implements Serializable {
     private BusinessDto owner;
     private ExpensDto expense;
     private LocalDate onDate;
-    private Double currentValue;
+    private Float currentValue;
 }

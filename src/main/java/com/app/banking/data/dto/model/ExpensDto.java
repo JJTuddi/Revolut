@@ -11,5 +11,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ExpensDto implements Serializable {
     private String name;
-    private Double expectedAmount;
+    private Float expectedAmount;
 }

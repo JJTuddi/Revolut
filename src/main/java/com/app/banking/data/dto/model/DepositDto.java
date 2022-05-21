@@ -16,7 +16,7 @@ public class DepositDto implements Serializable {
     private UserDto owner;
     private DepositTypeDto depositType;
     private LocalDate createdOn;
-    private Double currentAmount;
+    private Float currentAmount;
     private LocalDate targetDate;
-    private Double targetAmount;
+    private Float targetAmount;
 }
