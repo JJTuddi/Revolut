@@ -1,4 +1,4 @@
-package com.assignment2.book_store;
+package com.app.banking.learning;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

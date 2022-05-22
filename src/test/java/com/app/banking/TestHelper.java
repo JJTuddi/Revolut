@@ -1,5 +1,9 @@
-package com.assignment2.book_store;
+package com.app.banking;
 
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.RestTemplate;
+
+import java.time.Duration;
 import java.util.Random;
 import java.util.UUID;
 
@@ -44,6 +48,13 @@ public class TestHelper {
             }
             return result.substring(0, numberOfCharacters);
         }
+    }
+
+    public static RestTemplate getBasicRestTemplateForTest() {
+        return new RestTemplateBuilder()
+                .setConnectTimeout(Duration.ofMillis(10000))
+                .setReadTimeout(Duration.ofMillis(10000))
+                .build();
     }
 
     public static String getUuidString() {
