@@ -1,143 +1,141 @@
-package com.app.banking.data.sql.repo;
+package com.app.banking.service;
 
-import com.app.banking.data.sql.entity.Deposit;
-import com.app.banking.data.sql.entity.DepositType;
-import com.app.banking.data.sql.entity.User;
+import com.app.banking.data.dto.mapper.DepositMapper;
+import com.app.banking.data.dto.mapper.DepositMapperImpl;
+import com.app.banking.data.dto.model.DepositDto;
+import com.app.banking.data.sql.entity.*;
 import com.app.banking.data.sql.entity.enums.EDepositType;
+import com.app.banking.data.sql.repo.DepositRepository;
+import com.app.banking.data.sql.repo.DepositTypeRepository;
+import com.app.banking.data.sql.repo.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.app.banking.TestCreationFactory.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class DepositRepositoryTest {
-
+public class DepositServiceIntegrationTest {
+    @Autowired
+    private DepositService depositService;
     @Autowired
     private DepositRepository depositRepository;
-
+    @Autowired
+    private DepositTypeRepository depositTypeRepository;
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private DepositTypeRepository depositTypeRepository;
+    private DepositMapper depositMapper;
 
     @BeforeEach
-    public void beforeEach() {
-        depositRepository.deleteAll();
+    void setUp() {
+        depositMapper = new DepositMapperImpl();
+
         userRepository.deleteAll();
         depositTypeRepository.deleteAll();
-
+        depositRepository.deleteAll();
     }
 
     @Test
-    public void testAddDeposit() {
+    void testFindAll() {
         User userSaved = saveUser();
         DepositType depositType = saveDepositType();
 
-        Deposit depositSaved = depositRepository.save(Deposit.builder()
-                .owner(userSaved)
-                .depositType(depositType)
-                .createdOn(randomDate())
-                .currentAmount(randomFloat())
-                .targetAmount(randomFloat())
-                .targetDate(randomDate())
-                .build());
-
-        assertNotNull(depositSaved);
-
-        assertThrows(DataIntegrityViolationException.class, () -> {
-            depositRepository.save(Deposit.builder()
-                    .build());
-        });
-    }
-
-
-    @Test
-    public void testFindAll(){
-        User userSaved = saveUser();
-        DepositType depositType = saveDepositType();
-
-        int noDeposits = 10;
         List<Deposit> deposits = new ArrayList<>();
-
+        int noDeposits = 10;
         for (int i = 0; i < noDeposits; i++) {
             deposits.add(Deposit.builder()
                     .owner(userSaved)
                     .depositType(depositType)
-                    .createdOn(randomDate())
                     .currentAmount(randomFloat())
-                    .targetAmount(randomFloat())
+                    .createdOn(randomDate())
                     .targetDate(randomDate())
+                    .targetAmount(randomFloat())
                     .build());
         }
         depositRepository.saveAll(deposits);
-        List<Deposit> all = depositRepository.findAll();
-        assertEquals(deposits.size(), all.size());
+
+        List<DepositDto> all = depositService.findAll();
+
+        assertEquals(noDeposits, all.size());
     }
 
     @Test
-    public void testAllDepositsByOwner(){
+    void testAllDepositssByOwner(){
         User userSaved = saveUser();
         DepositType depositType = saveDepositType();
 
-        int noDeposits = 10;
         List<Deposit> deposits = new ArrayList<>();
-
+        int noDeposits = 10;
         for (int i = 0; i < noDeposits; i++) {
             deposits.add(Deposit.builder()
                     .owner(userSaved)
                     .depositType(depositType)
-                    .createdOn(randomDate())
                     .currentAmount(randomFloat())
-                    .targetAmount(randomFloat())
+                    .createdOn(randomDate())
                     .targetDate(randomDate())
+                    .targetAmount(randomFloat())
                     .build());
         }
         depositRepository.saveAll(deposits);
 
-        List<Deposit> all = depositRepository.findAllByOwnerId(userSaved.getId());
-        assertEquals(deposits.size(), all.size());
-
+        List<DepositDto> fundDeposits = depositService.allDepositsByOwner(userSaved.getId());
+        assertEquals(noDeposits, fundDeposits.size());
     }
 
     @Test
-    public void testDeleteById(){
+    void testAddDeposit(){
         User userSaved = saveUser();
         DepositType depositType = saveDepositType();
-
-
-        Deposit savedDeposit = depositRepository.save(Deposit.builder()
+        Deposit deposit = Deposit.builder()
                 .owner(userSaved)
                 .depositType(depositType)
-                .createdOn(randomDate())
                 .currentAmount(randomFloat())
-                .targetAmount(randomFloat())
+                .createdOn(randomDate())
                 .targetDate(randomDate())
-                .build());
+                .targetAmount(randomFloat())
+                .build();
 
+        DepositDto depositDto = depositMapper.depositToDepositDto(deposit);
 
-        depositRepository.deleteById(savedDeposit.getId());
+        DepositDto savedDepositDto = depositService.addDeposit(depositDto);
 
-        Optional<Deposit> result = depositRepository.findById(savedDeposit.getId());
-        assertTrue(result.isEmpty());
+        assertEquals(savedDepositDto, depositDto);
+    }
+
+    @Test
+    void testUpdateDeposit(){
+        User userSaved = saveUser();
+        DepositType depositType = saveDepositType();
+        Deposit deposit = Deposit.builder()
+                .owner(userSaved)
+                .depositType(depositType)
+                .currentAmount(randomFloat())
+                .createdOn(randomDate())
+                .targetDate(randomDate())
+                .targetAmount(randomFloat())
+                .build();
+
+        DepositDto depositDto = depositMapper.depositToDepositDto(deposit);
+
+        DepositDto savedDepositDto = depositService.update(1, depositDto);
+
+        assertEquals(savedDepositDto, depositDto);
     }
 
     private User saveUser(){
-        String email = "email@employee.com";
+
         //String password = "Abcdefg1234!";
         return userRepository.save(User.builder()
                 .firstName(randomString())
                 .lastName(randomString())
                 .username(randomString())
-                .email(email)
+                .email(randomString() + "@email.com")
                 .passwordHash(randomString())
                 .role(randomString())
                 .birthDate(randomDate())

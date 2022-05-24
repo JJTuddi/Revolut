@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +13,6 @@ import java.time.LocalDate;
 public class ExpensesOnMonthDto implements Serializable {
     private BusinessDto owner;
     private ExpensDto expense;
-    private LocalDate onDate;
+    private LocalDateTime onDate;
     private Float currentValue;
 }

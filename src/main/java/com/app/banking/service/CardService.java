@@ -72,7 +72,25 @@ public class CardService {
         Card cardEntity = cardMapper.cardDtoToCard(cardDto);
         cardEntity.setId(id);
 
-       return cardMapper.cardToCardDto(cardRepository.save(cardEntity));
+        Optional<User> userOp = userRepository.findByUsername(cardDto.getOwner().getUsername());
+        Optional<CardType> cardTypeOp = cardTypeRepository.findByNameLike(cardDto.getCardType().getName());
+        Optional<CardStatus> cardStatusOp = cardStatusRepository.findByNameLike(cardDto.getCardStatus().getName());
+
+        Card card = cardMapper.cardDtoToCard(cardDto);
+
+        userOp.ifPresent(card::setOwner);
+        cardTypeOp.ifPresent(card::setCardType);
+        cardStatusOp.ifPresent(card::setCardStatus);
+
+        CardDto cardDtoAdded;
+
+        try{
+            cardDtoAdded = cardMapper.cardToCardDto(cardRepository.save(card));
+        }catch(Exception e){
+            cardDtoAdded = null;
+        }
+
+        return cardDtoAdded;
     }
 
     public void delete(Integer id){

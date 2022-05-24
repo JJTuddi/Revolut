@@ -41,7 +41,7 @@ public class UserControllerTest extends BaseControllerTest {
     }
 
     @Test
-    void allRegularUsers() throws Exception {
+    void testAllUsers() throws Exception {
         List<UserDto> users = new ArrayList<>();
         int noUsers = 10;
         for (int i = 0; i < noUsers; i++) {

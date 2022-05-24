@@ -18,4 +18,7 @@ public class URLMapping {
     //reports
     public static final String REPORTS = API_PATH +"/reports";
 
+    //emails
+    public static final String EMAIL = API_PATH + "/email";
+
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -15,8 +15,8 @@ import java.time.LocalDate;
 public class DepositDto implements Serializable {
     private UserDto owner;
     private DepositTypeDto depositType;
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
     private Float currentAmount;
-    private LocalDate targetDate;
+    private LocalDateTime targetDate;
     private Float targetAmount;
 }
