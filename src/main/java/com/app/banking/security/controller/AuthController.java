@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.app.banking.UrlMapping.*;
+import static com.app.banking.URLMapping.*;
 
 @RestController
 @RequestMapping(AUTH)

@@ -1,4 +1,4 @@
 package com.app.banking.service;
 
-public class DummyService {
+public class TransferService {
 }

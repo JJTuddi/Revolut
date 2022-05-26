@@ -19,7 +19,7 @@ public class UriBuilderLearningTest {
     private static final String PATH2 = "path2";
     private static final Map<String, String> QUERY_PARAMS = Map.of("qp1", "val1", "qp2", "val2", "qp3", "val3", "qp4", "val with whitespaces");
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void simpleTestUriBuilder() {
         StringBuilder expected = new StringBuilder(String.format("%s/%s/%s?", ORIGIN1, PATH1, PATH2));
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(ORIGIN1)
@@ -38,7 +38,7 @@ public class UriBuilderLearningTest {
         assertEquals(expected.toString(), result);
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testWithChangedPortNumber() {
         StringBuilder expected = new StringBuilder(String.format("%s:%s/%s/%s?", ORIGIN2, NEXT_PORT, PATH2, PATH1));
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(ORIGIN2)
@@ -58,7 +58,7 @@ public class UriBuilderLearningTest {
         assertEquals(expected.toString(), result);
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testPortChanging() {
         StringBuilder expected = new StringBuilder(String.format("%s/%s/%s?", ORIGIN1.replace(ORIGINAL_PORT, NEXT_PORT), PATH2, PATH1));
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(ORIGIN1)

@@ -17,9 +17,9 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtUtils {
 
-    @Value("${bookstoreApp.security.jwt.secret}")
+    @Value("${app.security.jwt.secret}")
     private String jwtSecret;
-    @Value("${bookstoreApp.security.jwt.expirationMs}")
+    @Value("${app.security.jwt.expirationMs}")
     private Integer jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {

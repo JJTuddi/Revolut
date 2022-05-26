@@ -21,19 +21,19 @@ class CurrencyClientTest {
         testClientConfiguration.setAvailableCurrenciesEndpoint("availableCurrencies");
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     void getCurrencies() {
         Map<String, Double> currencies = currencyClient.getCurrencies();
         assertNotNull(currencies);
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     void getAvailableCurrencies() {
         List<String> availableCurrencies = currencyClient.getAvailableCurrencies();
         assertNotNull(availableCurrencies);
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     void getCurrency() {
         Map<String, Double> currencies = currencyClient.getCurrencies();
         assertNotNull(currencies);

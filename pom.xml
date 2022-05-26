@@ -157,7 +157,6 @@
                 <version>8.5.10</version>
                 <configuration>
                     <user>${flyway.user}</user>
-                    <!--suppress UnresolvedMavenProperty -->
                     <password>${flyway.password}</password>
                     <url>${flyway.url}</url>
                     <sqlMigrationPrefix>${flyway.sqlMigrationPrefix}</sqlMigrationPrefix>

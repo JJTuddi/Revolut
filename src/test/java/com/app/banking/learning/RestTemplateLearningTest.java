@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.junit.jupiter.api.RepeatedTest;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -14,14 +13,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.lang.reflect.Field;
 import java.net.URI;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static com.app.banking.TestHelper.getBasicRestTemplateForTest;
-import static com.app.banking.TestHelper.getRandomString;
+import static com.app.banking.TestHelper.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RestTemplateLearningTest {
@@ -39,7 +36,7 @@ public class RestTemplateLearningTest {
 
     private String baseUrlLearnRequests = "http://localhost:5523/learnrequests";
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testGetRequestDeserializeObject() throws IllegalAccessException, CloneNotSupportedException {
         String toAdd = getRandomString(STRING_SIZE);
         RequestTestClass obj = getRandomRequestTestObject();
@@ -50,7 +47,7 @@ public class RestTemplateLearningTest {
         assertEquals(obj.computeWithAddedFields(toAdd), result.getBody());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testGetRequestDeserializeObject_getMap() throws IllegalAccessException, CloneNotSupportedException {
         String toAdd = getRandomString(STRING_SIZE);
         RequestTestClass obj = getRandomRequestTestObject();
@@ -63,7 +60,7 @@ public class RestTemplateLearningTest {
         assertEquals(expectedResult, result.getBody());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testGetRequestDeserializeObject_exchange() throws IllegalAccessException, CloneNotSupportedException {
         String toAdd = getRandomString(STRING_SIZE);
         RequestTestClass obj = getRandomRequestTestObject();
@@ -74,7 +71,7 @@ public class RestTemplateLearningTest {
         assertEquals(obj.computeWithAddedFields(toAdd), result.getBody());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testPostRequestDeserializeObject() throws CloneNotSupportedException, IllegalAccessException {
         String toAdd = getRandomString(STRING_SIZE);
         RequestTestClass obj = getRandomRequestTestObject();
@@ -86,7 +83,7 @@ public class RestTemplateLearningTest {
         assertEquals(obj.computeWithAddedFields(toAdd), result.getBody());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testPostRequestDeserializeObject_exchange() throws CloneNotSupportedException, IllegalAccessException {
         String toAdd = getRandomString(STRING_SIZE);
         RequestTestClass obj = getRandomRequestTestObject();
@@ -98,7 +95,7 @@ public class RestTemplateLearningTest {
         assertEquals(obj.computeWithAddedFields(toAdd), result.getBody());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testPutRequestDeserializeObject() throws CloneNotSupportedException, IllegalAccessException {
         RequestTestClass obj = getRandomRequestTestObject();
         String fieldName = obj.sampleFieldName(), newFieldValue = getRandomString(STRING_SIZE);
@@ -110,7 +107,7 @@ public class RestTemplateLearningTest {
         assertEquals(obj.computeWithChangedField(fieldName, newFieldValue), result.getBody());
     }
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void testDeleteDeserializeObject() throws CloneNotSupportedException, IllegalAccessException {
         RequestTestClass obj = getRandomRequestTestObject();
         String fieldName = obj.sampleFieldName();

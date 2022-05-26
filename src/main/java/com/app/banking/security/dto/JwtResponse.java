@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 public class JwtResponse {
 
-    private Long id;
+    private Integer id;
     private String token;
     private String username;
     private String email;

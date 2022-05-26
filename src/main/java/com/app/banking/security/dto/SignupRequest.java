@@ -6,6 +6,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -28,5 +29,7 @@ public class SignupRequest {
     @NotEmpty(message = "password could not be empty")
     @Size(min = 8, max = 32, message = "password should have between 8 and 32 characters")
     private String password;
+    @NotNull(message = "birthDate could not be null")
+    private String birthDate;
 
 }

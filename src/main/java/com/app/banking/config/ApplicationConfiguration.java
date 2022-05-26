@@ -1,23 +1,27 @@
 package com.app.banking.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
-@Configuration
-@ConfigurationProperties(prefix = "app")
+@Getter
+@Setter
+@Component
 public class ApplicationConfiguration {
 
     private static final String ENDPOINT = "/latest";
 
-    @Value("${client.restTemplate.connectionTimeout}")
+    @Value("${app.client.restTemplate.connectTimeout}")
     private Long connectionTimeout;
-    @Value("${client.restTemplate.readTimeout}")
+    @Value("${app.client.restTemplate.readTimeout}")
     private Long readTimeout;
 
     @Bean
