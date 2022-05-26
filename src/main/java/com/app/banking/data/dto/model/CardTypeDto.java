@@ -16,6 +16,8 @@ public class CardTypeDto implements Serializable {
     private Integer maxWithdrawal;
     private Float cashbackPercent;
 
+    private final Float epsilonError = 0.000001f;
+
     @Override
     public boolean equals(Object o) {
 
@@ -32,6 +34,6 @@ public class CardTypeDto implements Serializable {
         return this.name.equals(c.getName())
                 && this.description.equals(c.getDescription())
                 && this.maxWithdrawal.equals(c.getMaxWithdrawal())
-                && this.cashbackPercent.equals(c.getCashbackPercent());
+                && Math.abs(this.cashbackPercent-c.getCashbackPercent())<this.epsilonError;
     }
 }

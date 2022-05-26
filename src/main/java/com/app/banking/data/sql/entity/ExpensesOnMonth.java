@@ -1,12 +1,13 @@
 package com.app.banking.data.sql.entity;
 
+import com.app.banking.util.CsvWriteable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "expenses_on_month")
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ExpensesOnMonth {
+public class ExpensesOnMonth implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -29,9 +30,14 @@ public class ExpensesOnMonth {
     private Expens expense;
 
     @Column(name = "onDate", nullable = false)
-    private LocalDate onDate;
+    private LocalDateTime onDate;
 
     @Column(name = "currentValue", nullable = false)
     private Float currentValue;
 
+    @Override
+    public String getCsvLine() {
+        return id.toString() + "," + owner.getId().toString() + "," + expense.getId().toString() + ","
+                + onDate.toString() + "," + currentValue.toString() + "\n";
+    }
 }

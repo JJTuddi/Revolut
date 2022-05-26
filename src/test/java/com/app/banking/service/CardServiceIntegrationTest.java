@@ -4,10 +4,8 @@ package com.app.banking.service;
 import com.app.banking.data.dto.mapper.CardMapper;
 import com.app.banking.data.dto.mapper.CardMapperImpl;
 import com.app.banking.data.dto.model.CardDto;
-import com.app.banking.data.sql.entity.Card;
-import com.app.banking.data.sql.entity.CardStatus;
-import com.app.banking.data.sql.entity.CardType;
-import com.app.banking.data.sql.entity.User;
+import com.app.banking.data.dto.model.DepositDto;
+import com.app.banking.data.sql.entity.*;
 import com.app.banking.data.sql.entity.enums.ECardStatus;
 import com.app.banking.data.sql.entity.enums.ECardType;
 import com.app.banking.data.sql.repo.CardRepository;
@@ -105,12 +103,12 @@ public class CardServiceIntegrationTest {
         }
         cardRepository.saveAll(cards);
 
-        List<CardDto> foundItems = cardService.allCardsByOwner(userSaved.getId());
-        assertEquals(noCards, foundItems.size());
+        List<CardDto> foundCards = cardService.allCardsByOwner(userSaved.getId());
+        assertEquals(noCards, foundCards.size());
     }
 
     @Test
-    void testAddCard(){             //TODO
+    void testAddCard(){
         User userSaved = saveUser();
         CardType cardType = saveCardType();
         CardStatus cardStatus = saveCardStatus();
@@ -127,6 +125,28 @@ public class CardServiceIntegrationTest {
         CardDto cardDto = cardMapper.cardToCardDto(card);
 
         CardDto savedCardDto = cardService.addCard(cardDto);
+
+        assertEquals(savedCardDto, cardDto);
+    }
+
+    @Test
+    void testUpdateCard(){
+        User userSaved = saveUser();
+        CardType cardType = saveCardType();
+        CardStatus cardStatus = saveCardStatus();
+        Card card = Card.builder()
+                .owner(userSaved)
+                .cardType(cardType)
+                .currentAmount(randomFloat())
+                .cvv(randomString().substring(0,3))
+                .number(randomString())
+                .expirationDate(randomDate())
+                .cardStatus(cardStatus)
+                .build();
+
+        CardDto cardDto = cardMapper.cardToCardDto(card);
+
+        CardDto savedCardDto = cardService.update(1, cardDto);
 
         assertEquals(savedCardDto, cardDto);
     }

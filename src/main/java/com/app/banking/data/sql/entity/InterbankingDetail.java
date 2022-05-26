@@ -1,5 +1,6 @@
 package com.app.banking.data.sql.entity;
 
+import com.app.banking.util.CsvWriteable;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InterbankingDetail {
+public class InterbankingDetail implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -42,5 +43,11 @@ public class InterbankingDetail {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String getCsvLine() {
+        return id.toString() + "," + bankName  + "," + ibanPrefix + "," + feesToTransfer.toString()  + "," +
+                endpointToCall + "\n";
     }
 }

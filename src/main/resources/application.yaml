@@ -46,3 +46,18 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+---
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: appbanking079@gmail.com
+    password: nyvnigfbcnjubblf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

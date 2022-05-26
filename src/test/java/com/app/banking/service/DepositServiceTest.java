@@ -4,7 +4,10 @@ import com.app.banking.data.dto.mapper.DepositMapper;
 import com.app.banking.data.dto.mapper.DepositMapperImpl;
 import com.app.banking.data.dto.model.DepositDto;
 import com.app.banking.data.sql.entity.*;
+import com.app.banking.data.sql.entity.enums.EDepositType;
 import com.app.banking.data.sql.repo.DepositRepository;
+import com.app.banking.data.sql.repo.DepositTypeRepository;
+import com.app.banking.data.sql.repo.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,9 +29,12 @@ import static org.mockito.Mockito.times;
 public class DepositServiceTest {
     @InjectMocks
     private DepositService depositService;
-
     @Mock
     private DepositRepository depositRepository;
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private DepositTypeRepository depositTypeRepository;
 
     private DepositMapper depositMapper;
 
@@ -36,7 +42,7 @@ public class DepositServiceTest {
     void setUp() {
         depositMapper = new DepositMapperImpl();
         MockitoAnnotations.openMocks(this);
-        depositService = new DepositService(depositRepository, depositMapper);
+        depositService = new DepositService(depositRepository, depositMapper, userRepository, depositTypeRepository);
     }
 
     @Test
@@ -156,7 +162,7 @@ public class DepositServiceTest {
 
     private DepositType buildDepositType(){
         return DepositType.builder()
-                .name(randomString()) //TODO
+                .name(EDepositType.DEPOSIT_TYPE)
                 .description(randomString())
                 .interestRate(randomFloat())
                 .build();

@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -20,7 +20,7 @@ public class CardDto implements Serializable {
     private Float currentAmount;
     private String cvv;
     private String number;
-    private LocalDate expirationDate;
+    private LocalDateTime expirationDate;
     private CardStatusDto cardStatus;
 
     @Override

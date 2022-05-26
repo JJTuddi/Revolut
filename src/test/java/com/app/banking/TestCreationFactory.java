@@ -2,7 +2,7 @@ package com.app.banking;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -21,14 +21,10 @@ public class TestCreationFactory {
                 .toString();
     }
 
-    public static LocalDate randomDate() {
-        long startEpochDay = 1920;
-        long endEpochDay = 2022;
-        long randomDay = ThreadLocalRandom
-                .current()
-                .nextLong(startEpochDay, endEpochDay);
-
-        return LocalDate.ofEpochDay(randomDay);
+    public static LocalDateTime randomDate() {
+        LocalDateTime now = LocalDateTime.now();
+        int year = 60 * 60 * 24 * 365;
+        return now.plusSeconds((long) new Random().nextInt(-2 * year, 2 * year));// +- 2 years;
     }
 
     public static Float randomFloat(){
