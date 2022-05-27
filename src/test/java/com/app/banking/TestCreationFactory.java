@@ -1,13 +1,14 @@
 package com.app.banking;
 
+import com.app.banking.data.sql.entity.enums.EDepositType;
 import com.app.banking.data.sql.entity.enums.UserRole;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+
+import static com.app.banking.TestHelper.getRandomIntegerBetween;
 
 public class TestCreationFactory {
 
@@ -24,14 +25,18 @@ public class TestCreationFactory {
                 .toString();
     }
 
-    public static LocalDate randomDate() {
-        long startEpochDay = 1920;
-        long endEpochDay = 2022;
-        long randomDay = ThreadLocalRandom
-                .current()
-                .nextLong(startEpochDay, endEpochDay);
+    public static LocalDate getRandomDate() {
+        LocalDate now = LocalDate.now();
+        return now.plusYears(getRandomIntegerBetween(1, 5));
+    }
 
-        return LocalDate.ofEpochDay(randomDay);
+    public static LocalDateTime getRandomDateTime() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.plusSeconds(getRandomIntegerBetween(0, 60))
+                .plusMinutes(getRandomIntegerBetween(0, 60))
+                .plusHours(getRandomIntegerBetween(0, 24))
+                .plusDays(getRandomIntegerBetween(0, 365))
+                .plusYears(getRandomIntegerBetween(-1, 1));
     }
 
     public static Float randomFloat(){
@@ -45,6 +50,11 @@ public class TestCreationFactory {
     public static UserRole getRandomRole() {
         List<UserRole> allRoles = UserRole.getListOfAllRoles();
         return allRoles.get((int) Math.floor(Math.random() * allRoles.size()));
+    }
+
+    public static EDepositType getRandomDepositType() {
+        List<EDepositType> allDeposits = EDepositType.getDepositTypes();
+        return allDeposits.get((int) Math.floor(Math.random() * allDeposits.size()));
     }
 
 }

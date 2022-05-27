@@ -7,6 +7,7 @@ import com.app.banking.data.sql.entity.Card;
 import com.app.banking.data.sql.entity.CardStatus;
 import com.app.banking.data.sql.entity.CardType;
 import com.app.banking.data.sql.entity.User;
+import com.app.banking.data.sql.entity.enums.ECardStatus;
 import com.app.banking.data.sql.repo.CardRepository;
 import com.app.banking.data.sql.repo.CardStatusRepository;
 import com.app.banking.data.sql.repo.CardTypeRepository;
@@ -44,16 +45,18 @@ public class CardService {
                 .collect(Collectors.toList());
     }
 
-    public List<CardDto> allCardsByOwner(Integer id) {
-        return cardRepository.findAllByOwnerId(id).stream()
+    public List<CardDto> allCardsByOwner(String username) {
+        User owner = userRepository.findByUsername(username)
+                .orElseThrow(() -> ErrorFactory.getError(HttpStatus.NOT_FOUND, "User with given credentials not found!"));
+        return cardRepository.findAllByOwnerId(owner.getId()).stream()
                 .map(cardMapper::cardToCardDto)
                 .collect(Collectors.toList());
     }
 
-    public CardDto addCard(CardDto cardDto) {
-        Optional<User> userOp = userRepository.findByUsername(cardDto.getOwner().getUsername());
+    public CardDto addCard(String username, CardDto cardDto) {
+        Optional<User> userOp = userRepository.findByUsername(username);
         Optional<CardType> cardTypeOp = cardTypeRepository.findByNameLike(cardDto.getCardType().getName());
-        Optional<CardStatus> cardStatusOp = cardStatusRepository.findByNameLike(cardDto.getCardStatus().getName());
+        Optional<CardStatus> cardStatusOp = cardStatusRepository.findByNameLike(ECardStatus.NOT_ACTIVATED);
 
         Card card = cardMapper.cardDtoToCard(cardDto);
 

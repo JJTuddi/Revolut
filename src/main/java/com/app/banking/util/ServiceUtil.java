@@ -13,6 +13,8 @@ public class ServiceUtil {
     private String dateFormatter;
     @Value("${app.serviceUtil.dateTimeFormatter}")
     private String dateTimeFormatter;
+    @Value("${app.serviceUtil.bankName}")
+    private String bankName;
 
     private ServiceUtil() {
 
@@ -24,6 +26,10 @@ public class ServiceUtil {
 
     public String formatDateToString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern(dateFormatter));
+    }
+
+    public String getBankName() {
+        return bankName;
     }
 
 }

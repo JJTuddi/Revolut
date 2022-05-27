@@ -3,12 +3,14 @@ package com.app.banking.data.sql.entity;
 
 
 import com.app.banking.data.sql.entity.enums.UserRole;
+import com.app.banking.util.CsvWriteable;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -18,7 +20,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -65,4 +67,11 @@ public class User {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @Override
+    public String getCsvLine() {
+        return id.toString() + "," + noSqlId + "," + firstName + "," + lastName + "," + username + "," +
+                passwordHash + "," + email + "," + role + "," + birthDate.toString() + "\n";
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.app.banking.data.sql.entity;
 
+import com.app.banking.util.CsvWriteable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "deposits")
@@ -14,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Deposit {
+public class Deposit implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -29,7 +31,7 @@ public class Deposit {
     private DepositType depositType;
 
     @Column(name = "createdOn", nullable = false)
-    private LocalDate createdOn;
+    private LocalDateTime createdOn;
 
     @Column(name = "currentAmount", nullable = false)
     private Float currentAmount;
@@ -40,4 +42,9 @@ public class Deposit {
     @Column(name = "targetAmount", nullable = false)
     private Float targetAmount;
 
+    @Override
+    public String getCsvLine() {
+        return id.toString() + "," + owner.getId().toString() + "," + depositType.toString() + "," + createdOn.toString()
+                + "," + currentAmount.toString() + "," + targetDate.toString() + "," + targetAmount.toString() + "\n";
+    }
 }

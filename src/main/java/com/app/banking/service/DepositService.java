@@ -7,6 +7,8 @@ import com.app.banking.data.mongo.track.DepositHistoryTracker;
 import com.app.banking.data.sql.entity.Card;
 import com.app.banking.data.sql.entity.Deposit;
 import com.app.banking.data.sql.repo.DepositRepository;
+import com.app.banking.data.sql.repo.DepositTypeRepository;
+import com.app.banking.data.sql.repo.UserRepository;
 import com.app.banking.exception.ErrorFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ public class DepositService {
 
     private final DepositRepository depositRepository;
     private final DepositMapper depositMapper;
+    private final UserRepository userRepository;
+    private final DepositTypeRepository depositTypeRepository;
     private final DepositHistoryTracker depositHistoryTracker;
 
     public List<DepositDto> findAll(){

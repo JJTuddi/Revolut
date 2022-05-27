@@ -1,5 +1,7 @@
 package com.app.banking.data.sql.entity;
 
+import com.app.banking.data.sql.entity.enums.EDepositType;
+import com.app.banking.util.CsvWriteable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,14 +15,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DepositType {
+public class DepositType implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 64)
-    private String name;
+    private EDepositType name;
 
     @Lob
     @Column(name = "description", nullable = false)
@@ -29,4 +32,8 @@ public class DepositType {
     @Column(name = "interestRate", nullable = false)
     private Float interestRate;
 
+    @Override
+    public String getCsvLine() {
+        return id.toString() + "," + name + "," + description + "," + interestRate.toString() + "\n";
+    }
 }

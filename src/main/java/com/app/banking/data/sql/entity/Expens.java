@@ -1,19 +1,18 @@
 package com.app.banking.data.sql.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.app.banking.util.CsvWriteable;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "expenses")
-@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Expens {
+@Table(name = "expenses")
+public class Expens implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -25,4 +24,8 @@ public class Expens {
     @Column(name = "expectedAmount", nullable = false)
     private Float expectedAmount;
 
+    @Override
+    public String getCsvLine() {
+        return id.toString() + "," + name + "," + expectedAmount.toString() + "\n";
+    }
 }

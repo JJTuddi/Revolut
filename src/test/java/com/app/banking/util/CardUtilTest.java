@@ -33,4 +33,17 @@ class CardUtilTest {
         }
     }
 
+    @RepeatedTest(10)
+    void getRandomCardNumber() {
+        String generatedCardNumber = cardUtil.getRandomCardNumber();
+        assertNotNull(generatedCardNumber);
+        assertTrue(generatedCardNumber.length() > 0);
+    }
+
+    @Test
+    void getRandomIbann() {
+        System.out.println(cardUtil.getRandomIban("EUR"));
+        System.out.println(cardUtil.getRandomCardNumber());
+    }
+
 }

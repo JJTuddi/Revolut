@@ -68,7 +68,7 @@ public class UserControllerTest extends BaseControllerTest {
                 .email(email)
                 .passwordHash(randomString())
                 .role(getRandomRole())
-                .birthDate(randomDate())
+                .birthDate(getRandomDate())
                 .build();
     }
 

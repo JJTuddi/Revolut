@@ -18,10 +18,11 @@ app:
   serviceUtil:
     dateFormatter: dd/MM/yyyy
     dateTimeFormatter: dd/MM/yyyy hh:mm:ss
+    bankName: Revolut
   security:
     jwt:
       secret: MySuperSecret69
-      expirationMs: 8400
+      expirationMs: 86400000
   card:
     ibanPrefix: "RO18BTRL"
   client:
@@ -39,6 +40,7 @@ app:
     userHistoryCollectionName: user_history
     cardHistoryCollectionName: card_history
     depositHistoryCollectionName: card_history
+    transferHistoryCollectionName: transfer_history
 server:
   port: 8088
 ---
@@ -78,3 +80,18 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+---
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: appbanking079@gmail.com
+    password: nyvnigfbcnjubblf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

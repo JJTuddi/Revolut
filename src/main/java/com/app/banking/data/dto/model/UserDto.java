@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class UserDto implements Serializable {
     private String email;
     private String role;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm a z")
-    private LocalDate birthDate;
+    private LocalDateTime birthDate;
 
     @Override
     public boolean equals(Object o) {
