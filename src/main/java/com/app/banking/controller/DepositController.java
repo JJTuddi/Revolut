@@ -1,6 +1,5 @@
 package com.app.banking.controller;
 
-import com.app.banking.data.dto.model.CardDto;
 import com.app.banking.data.dto.model.DepositDto;
 import com.app.banking.service.DepositService;
 import lombok.RequiredArgsConstructor;

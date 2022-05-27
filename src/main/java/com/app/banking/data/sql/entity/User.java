@@ -2,12 +2,14 @@ package com.app.banking.data.sql.entity;
 
 
 
+import com.app.banking.data.sql.entity.enums.UserRole;
 import com.app.banking.util.CsvWriteable;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -42,11 +44,15 @@ public class User implements CsvWriteable {
     @Column(name = "email", nullable = false, length = 64)
     private String email;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "role", nullable = false, length = 16)
-    private String role;
+    private UserRole role;
 
     @Column(name = "birthDate", nullable = false)
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
+
+    @Column(name = "profileImageName", length = 70)
+    private String profileImageName;
 
 
     @Override
@@ -67,4 +73,5 @@ public class User implements CsvWriteable {
         return id.toString() + "," + noSqlId + "," + firstName + "," + lastName + "," + username + "," +
                 passwordHash + "," + email + "," + role + "," + birthDate.toString() + "\n";
     }
+
 }

@@ -1,13 +1,12 @@
 package com.app.banking.data.dto.model;
 
 import com.app.banking.data.sql.entity.enums.ECardType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardTypeDto implements Serializable {

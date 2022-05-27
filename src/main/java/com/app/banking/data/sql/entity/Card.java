@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -39,7 +40,10 @@ public class Card implements CsvWriteable {
     private String number;
 
     @Column(name = "expirationDate", nullable = false)
-    private LocalDateTime expirationDate;
+    private LocalDate expirationDate;
+
+    @Column(name = "iban", nullable = false, length = 34)
+    private String iban;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "statusId", nullable = false)

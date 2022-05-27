@@ -17,8 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.app.banking.TestCreationFactory.randomDate;
-import static com.app.banking.TestCreationFactory.randomString;
+import static com.app.banking.TestCreationFactory.*;
 import static com.app.banking.URLMapping.USERS;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -41,7 +40,7 @@ public class UserControllerTest extends BaseControllerTest {
     }
 
     @Test
-    void testAllUsers() throws Exception {
+    void allRegularUsers() throws Exception {
         List<UserDto> users = new ArrayList<>();
         int noUsers = 10;
         for (int i = 0; i < noUsers; i++) {
@@ -68,8 +67,8 @@ public class UserControllerTest extends BaseControllerTest {
                 .username(randomString())
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build();
     }
 

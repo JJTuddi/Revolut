@@ -1,27 +1,23 @@
 package com.app.banking.data.dto.model;
 
-import com.app.banking.data.dto.model.CardTypeDto;
-import com.app.banking.data.dto.model.UserDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardDto implements Serializable {
-    private UserDto owner;
+
+
     private CardTypeDto cardType;
     private Float currentAmount;
     private String cvv;
     private String number;
-    private LocalDateTime expirationDate;
-    private CardStatusDto cardStatus;
+    private LocalDate expirationDate;
 
     @Override
     public boolean equals(Object o) {
@@ -36,12 +32,11 @@ public class CardDto implements Serializable {
 
         CardDto c = (CardDto) o;
 
-        return this.owner.equals(c.getOwner())
-                && this.cardType.equals(c.getCardType())
+        return this.cardType.equals(c.getCardType())
                 && this.currentAmount.equals(c.getCurrentAmount())
                 && this.cvv.equals(c.getCvv())
                 && this.number.equals(c.getNumber())
-                && this.expirationDate.equals(c.getExpirationDate())
-                && this.cardStatus.equals(c.getCardStatus());
+                && this.expirationDate.equals(c.getExpirationDate());
     }
+
 }

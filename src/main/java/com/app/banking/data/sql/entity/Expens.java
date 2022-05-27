@@ -1,19 +1,17 @@
 package com.app.banking.data.sql.entity;
 
 import com.app.banking.util.CsvWriteable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
-@Table(name = "expenses")
-@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "expenses")
 public class Expens implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

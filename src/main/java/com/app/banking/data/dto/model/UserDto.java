@@ -1,14 +1,13 @@
 package com.app.banking.data.dto.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto implements Serializable {
@@ -42,4 +41,5 @@ public class UserDto implements Serializable {
                 && this.role.equals(u.getRole())
                 && this.birthDate.equals(u.getBirthDate());
     }
+
 }

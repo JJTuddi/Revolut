@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -36,7 +37,7 @@ public class Deposit implements CsvWriteable {
     private Float currentAmount;
 
     @Column(name = "targetDate", nullable = false)
-    private LocalDateTime targetDate;
+    private LocalDate targetDate;
 
     @Column(name = "targetAmount", nullable = false)
     private Float targetAmount;

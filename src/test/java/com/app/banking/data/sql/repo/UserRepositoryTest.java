@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.app.banking.TestCreationFactory.randomDate;
-import static com.app.banking.TestCreationFactory.randomString;
+import static com.app.banking.TestCreationFactory.*;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,8 +37,8 @@ public class UserRepositoryTest {
                 .username(randomString())
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build());
 
         assertNotNull(userSaved);
@@ -51,8 +50,8 @@ public class UserRepositoryTest {
                     .username(randomString())
                     .email(email)
                     .passwordHash(randomString())
-                    .role(randomString())
-                    .birthDate(randomDate())
+                    .role(getRandomRole())
+                    .birthDate(getRandomDate())
                     .build());
         });
     }
@@ -68,8 +67,8 @@ public class UserRepositoryTest {
                 .username(username)
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build());
 
         repository.save(user);
@@ -88,8 +87,8 @@ public class UserRepositoryTest {
                 .username(username)
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build());
 
         repository.save(user);
@@ -112,8 +111,8 @@ public class UserRepositoryTest {
                 .username(username)
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build());
 
         repository.save(user);
@@ -133,8 +132,8 @@ public class UserRepositoryTest {
                     .username(randomString())
                     .email(i + "@email.com")
                     .passwordHash(randomString())
-                    .role(randomString())
-                    .birthDate(randomDate())
+                    .role(getRandomRole())
+                    .birthDate(getRandomDate())
                     .build());
         }
         repository.saveAll(users);
@@ -152,8 +151,8 @@ public class UserRepositoryTest {
                 .username(randomString())
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build());
 
         User savedUser = repository.save(user);
@@ -173,8 +172,8 @@ public class UserRepositoryTest {
                 .username(randomString())
                 .email(email)
                 .passwordHash(randomString())
-                .role(randomString())
-                .birthDate(randomDate())
+                .role(getRandomRole())
+                .birthDate(getRandomDate())
                 .build());
 
         //User savedUser = repository.save(user);

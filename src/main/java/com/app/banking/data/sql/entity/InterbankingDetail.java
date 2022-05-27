@@ -32,6 +32,9 @@ public class InterbankingDetail implements CsvWriteable {
     @Column(name = "endpointToCall", nullable = false, length = 128)
     private String endpointToCall;
 
+    @Column(name = "identifyToken", nullable = false, length = 64)
+    private String identifyToken;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

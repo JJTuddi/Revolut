@@ -10,7 +10,39 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: none
-
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+app:
+  serviceUtil:
+    dateFormatter: dd/MM/yyyy
+    dateTimeFormatter: dd/MM/yyyy hh:mm:ss
+    bankName: Revolut
+  security:
+    jwt:
+      secret: MySuperSecret69
+      expirationMs: 86400000
+  card:
+    ibanPrefix: "RO18BTRL"
+  client:
+    restTemplate:
+      connectTimeout: 69420
+      readTimeout: 69420
+    services:
+      currency:
+        baseUrl: http://localhost:3070/rates
+        latestRatesEndpoint: latest
+        availableCurrenciesEndpoint: availableCurrencies
+  mongodb:
+    databaseName: revolut
+    connectionString: mongodb://localhost:27017/revolut
+    userHistoryCollectionName: user_history
+    cardHistoryCollectionName: card_history
+    depositHistoryCollectionName: card_history
+    transferHistoryCollectionName: transfer_history
+server:
+  port: 8088
 ---
 
 spring:
@@ -38,6 +70,8 @@ spring:
     user: root
     password: tuddiroot
     url: jdbc:mysql://localhost:3306/revolut
+server:
+  port: 8080
 
 ---
 

@@ -26,7 +26,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto findById(Integer id){
+    public UserDto findById(Integer id){       //TODO test
         return userRepository.findById(id)
                 .map(userMapper::userToUserDto)
                 .orElseThrow(() -> new RuntimeException(format("Card with id %s not found", id)));
