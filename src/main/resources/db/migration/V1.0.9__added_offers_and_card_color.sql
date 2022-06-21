@@ -13,3 +13,10 @@ ALTER TABLE `revolut`.`card_types`
 
 ALTER TABLE `revolut`.`contacts`
     CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `revolut`.`transfers`
+    CHANGE COLUMN `from` `from` CHAR(36) NOT NULL ,
+    CHANGE COLUMN `to` `to` CHAR(36) NOT NULL ;
+
+ALTER TABLE `revolut`.`transfers`
+    CHANGE COLUMN `id` `id` INT NOT NULL AUTO_INCREMENT ;

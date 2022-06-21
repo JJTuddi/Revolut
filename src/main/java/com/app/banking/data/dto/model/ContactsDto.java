@@ -16,5 +16,6 @@ public class ContactsDto {
     private String firstName;
     private String email;
     private List<String> ibans;
+    private String profileImageName;
 
 }

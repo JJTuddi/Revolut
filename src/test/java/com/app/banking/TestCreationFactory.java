@@ -52,7 +52,7 @@ public class TestCreationFactory {
         return allRoles.get((int) Math.floor(Math.random() * allRoles.size()));
     }
 
-    public static EDepositType getRandomDepositType() {
+    public static String getRandomDepositType() {
         List<EDepositType> allDeposits = EDepositType.getDepositTypes();
         return allDeposits.get((int) Math.floor(Math.random() * allDeposits.size()));
     }

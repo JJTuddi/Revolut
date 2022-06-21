@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +30,13 @@ public class DepositService {
 
     public List<DepositDto> findAll(){
         return depositRepository.findAll().stream()
+                .map(depositMapper::depositToDepositDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<DepositDto> getMyDeposits(String username) {
+        return depositRepository.findAll().stream()
+                .filter(deposit -> Objects.equals(deposit.getOwner().getUsername(), username))
                 .map(depositMapper::depositToDepositDto)
                 .collect(Collectors.toList());
     }

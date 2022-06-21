@@ -5,6 +5,7 @@ import com.app.banking.service.DepositService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 import static com.app.banking.URLMapping.*;
@@ -15,6 +16,11 @@ import static com.app.banking.URLMapping.*;
 @CrossOrigin(originPatterns = "http://localhost:*")
 public class DepositController {
     private final DepositService depositService;
+
+    @GetMapping("/my")
+    public List<DepositDto> getMyDeposits(Principal principal) {
+        return depositService.getMyDeposits(principal.getName());
+    }
 
     @GetMapping
     public List<DepositDto> allCards(){

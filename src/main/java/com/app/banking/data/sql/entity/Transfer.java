@@ -24,9 +24,9 @@ public class Transfer {
     private TransferStatus transferStatus;
     @Column(name = "amount")
     private Double amount;
-    @Column(name = "from", length = 34)
+    @Column(name = "from", length = 36)
     private String from;
-    @Column(name = "to", length = 34)
+    @Column(name = "to", length = 36)
     private String to;
     @Column(name = "remainingAttempts")
     private Short remainingAttempts;

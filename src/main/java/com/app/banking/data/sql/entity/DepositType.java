@@ -21,9 +21,8 @@ public class DepositType {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 64)
-    private EDepositType name;
+    private String name;
 
     @Lob
     @Column(name = "description", nullable = false)

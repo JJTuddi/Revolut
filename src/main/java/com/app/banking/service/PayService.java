@@ -2,7 +2,6 @@ package com.app.banking.service;
 
 
 import com.app.banking.data.dto.model.PaymentDetails;
-import com.app.banking.data.mongo.entity.TransferHistory;
 import com.app.banking.data.mongo.track.TransferHistoryTrack;
 import com.app.banking.data.sql.entity.Business;
 import com.app.banking.data.sql.entity.Card;
@@ -11,7 +10,6 @@ import com.app.banking.data.sql.entity.enums.TransferStatus;
 import com.app.banking.data.sql.repo.BusinessRepository;
 import com.app.banking.data.sql.repo.CardRepository;
 import com.app.banking.data.sql.repo.TransferRepository;
-import com.app.banking.data.sql.repo.UserRepository;
 import com.app.banking.exception.ErrorFactory;
 import com.app.banking.util.CardUtil;
 import lombok.RequiredArgsConstructor;
@@ -61,14 +59,17 @@ public class PayService {
                 .amount(transferDetails.getAmount())
                 .from(ownerCard.getIban())
                 .startedOn(LocalDateTime.now())
+                .remainingAttempts(Short.valueOf("16"))
                 .to(transferDetails.getIbanToTransfer());
-        ownerCard.setCurrentAmount((float)(ownerCard.getCurrentAmount() - transferDetails.getAmount()));
+        ownerCard.setCurrentAmount((float) (ownerCard.getCurrentAmount() - transferDetails.getAmount()));
         if (cardUtil.isIbanFromCurrentBank(transferDetails.getIbanToTransfer())) {
             // Instant transfer
             if (cardRepository.findByIban(transferDetails.getIbanToTransfer()).isEmpty()) {
                 throw ErrorFactory.getError(HttpStatus.NOT_FOUND, "Iban to transfer seems to be from our bank but there is no account with this iban!");
             }
-            transferRepository.save(transfer.transferStatus(TransferStatus.DONE).build());
+            Card destinationCard = cardRepository.findByIban(transferDetails.getIbanToTransfer()).get();
+            destinationCard.setCurrentAmount((float) (destinationCard.getCurrentAmount() + transferDetails.getAmount()));
+//            transferRepository.save(transfer.transferStatus(TransferStatus.DONE).doneOn(LocalDateTime.now()).build());
             transferHistoryTrack.internTransferAudit(transferDetails);
         } else {
             // it should wait...

@@ -24,7 +24,7 @@ public class ContactsService {
 
     private final UserRepository userRepository;
     private final ContactsRepository contactsRepository;
-    private CardRepository cardRepository;
+    private final CardRepository cardRepository;
 
     public List<ContactsDto> getMyContacts(String username) {
         return getMyContactsByRequestStatus(username, RequestStatus.ACCEPTED);
@@ -56,7 +56,7 @@ public class ContactsService {
         return contactsRepository.findContactsByPerson1IdOrPerson2Id(myself.getId(), myself.getId()).stream()
                 .filter(contact -> Objects.equals(contact.getRequestStatus(), requestStatus))
                 .map(contact -> {
-                    User contactDetails = userRepository.findById(contact.getId()).get();
+                    User contactDetails = userRepository.findById(getOtherPersonId(myself.getId(), contact)).get();
                     List<String> ibans = cardRepository.findAllByOwnerId(contactDetails.getId()).stream()
                             .map(Card::getIban)
                             .collect(Collectors.toList());
@@ -66,8 +66,13 @@ public class ContactsService {
                             .firstName(contactDetails.getFirstName())
                             .email(contactDetails.getEmail())
                             .ibans(ibans)
+                            .profileImageName(contactDetails.getProfileImageName())
                             .build();
                 }).collect(Collectors.toList());
+    }
+
+    private Integer getOtherPersonId(Integer myId, Contacts contact) {
+        return contact.getPerson1Id() + contact.getPerson2Id() - myId;
     }
 
 }
