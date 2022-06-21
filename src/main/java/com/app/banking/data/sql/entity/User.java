@@ -13,14 +13,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@AllArgsConstructor
 @Table(name = "users")
-public class User implements CsvWriteable {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -66,12 +66,6 @@ public class User implements CsvWriteable {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + noSqlId + "," + firstName + "," + lastName + "," + username + "," +
-                passwordHash + "," + email + "," + role + "," + birthDate.toString() + "\n";
     }
 
 }

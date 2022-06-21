@@ -19,6 +19,7 @@ public class UserDto implements Serializable {
     private String role;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm a z")
     private LocalDateTime birthDate;
+    private String profileImageName;
 
     @Override
     public boolean equals(Object o) {

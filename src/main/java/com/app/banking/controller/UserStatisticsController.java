@@ -13,6 +13,7 @@ import static com.app.banking.URLMapping.USERS_STATISTICS;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(USERS_STATISTICS)
+@CrossOrigin(originPatterns = "http://localhost:*")
 public class UserStatisticsController {
 
     private final UserStatisticsService userStatisticsService;

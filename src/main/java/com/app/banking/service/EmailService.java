@@ -1,113 +1,72 @@
 package com.app.banking.service;
 
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import java.util.List;
+import javax.mail.*;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 
+import com.app.banking.config.MailConfig;
+import com.app.banking.data.dto.email.EmailDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-//import javax.mail.*;
-//import javax.mail.internet.*;
-//import java.io.IOException;
-//import java.util.Date;
-
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class EmailService {
 
-    public void sendEmail(){
-        // Recipient's email ID needs to be mentioned.
-        String to = "alexandrapatica@gmail.com";
+    private final MailConfig mailConfig;
 
-        // Sender's email ID needs to be mentioned
-        String from = "appbanking079@gmail.com";
-
-        // Assuming you are sending email from through gmails smtp
-        String host = "smtp.gmail.com";
-
-        // Get system properties
-        Properties properties = System.getProperties();
-
-        // Setup mail server
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
-
-        // Get the Session object.// and pass username and password
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
-            protected PasswordAuthentication getPasswordAuthentication() {
-
-                return new PasswordAuthentication("appbanking079@gmail.com", "nyvnigfbcnjubblf");
-
-            }
-
-        });
-
-        // Used to debug SMTP issues
-        session.setDebug(true);
-
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
-
-            // Now set the actual message
-            message.setText("This is actual message");
-
-            System.out.println("sending...");
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully....");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
+    public void sendEmail(EmailDto email, String recipient) {
+        if (mailConfig.isMailSendingNotEnabled()) {
+            return;
         }
-//        Properties props = new Properties();
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.host", "smtp.gmail.com");
-//        props.put("mail.username", "appbanking079@gmail.com");
-//        props.put("mail.password", "nyvnigfbcnjubblf");
-//        props.put("mail.port", "587");
-//
-//
-//        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication("appbanking079@gmail.com", "nyvnigfbcnjubblf");
-//            }
-//        });
-//        Message msg = new MimeMessage(session);
-//        msg.setFrom(new InternetAddress("appbanking079@gmail.com", false));
-//
-//        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("alexandrapatica@gmail.com"));
-//        msg.setSubject("Tutorials point email");
-//        msg.setContent("Tutorials point email", "text/html");
-//        msg.setSentDate(new Date());
-//
-//        MimeBodyPart messageBodyPart = new MimeBodyPart();
-//        messageBodyPart.setContent("Tutorials point email", "text/html");
-//
-//        Multipart multipart = new MimeMultipart();
-//        multipart.addBodyPart(messageBodyPart);
-//        MimeBodyPart attachPart = new MimeBodyPart();
-//
-//        attachPart.attachFile("util/lion.png");
-//        multipart.addBodyPart(attachPart);
-//        msg.setContent(multipart);
-//        Transport.send(msg);
+        try {
+            Message message = new MimeMessage(mailConfig.getMailSession());
+
+            message.setFrom(mailConfig.getFrom());
+            message.addRecipient(Message.RecipientType.TO, getRecipientAddress(recipient));
+            message.setSubject(email.getSubject());
+            message.setText(email.getContent());
+
+            Transport.send(message);
+        } catch (MessagingException exception) {
+            log.error("An error occurred while sending the email.", exception);
+        }
     }
+
+    public void sendEmail(EmailDto email, List<String> recipients) {
+        if (mailConfig.isMailSendingNotEnabled()) {
+            return;
+        }
+        try {
+            Message message = new MimeMessage(mailConfig.getMailSession());
+
+            message.setFrom(mailConfig.getFrom());
+            message.addRecipients(Message.RecipientType.TO, getRecipientsAddresses(recipients));
+            message.setSubject(email.getSubject());
+            message.setText(email.getContent());
+
+            Transport.send(message);
+        } catch (MessagingException exception) {
+            log.error("An error occurred while sending the email.", exception);
+        }
+    }
+
+    private Address[] getRecipientsAddresses(List<String> recipients) {
+        return (Address[]) recipients.stream().map(this::getRecipientAddress).toArray();
+    }
+
+    private Address getRecipientAddress(String recipient) {
+        try {
+            return new InternetAddress(recipient);
+        } catch (AddressException exception) {
+            log.error("Error while getting the InternetAddress for {}", recipient, exception);
+            return new InternetAddress();
+        }
+    }
+
 }

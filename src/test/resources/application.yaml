@@ -1,35 +1,45 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: tuddiroot
-    url: jdbc:mysql://localhost:3306/revolut
   flyway:
     locations: classpath:db/migration
     sql-migration-prefix: V
     baseline-version: 1
-    user: root
-    password: tuddiroot
-    url: jdbc:mysql://localhost:3306/revolut
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: none
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   session:
     store-type: jdbc
     jdbc:
       initialize-schema: always
 app:
+  mail:
+    enableSending: false
+    host: host
+    secure: true
+    service: service
+    user: user
+    pass: password
+    port: 465
+    sessionDebug: true
+  facebook:
+    graph:
+      baseUrl: https://graph.facebook.com/v14.0/me/feed
+      tokenName: access_token
+    page:
+      authToken: myToken
+  external:
+    baseUrl: http://localhost:3078
   serviceUtil:
     dateFormatter: dd/MM/yyyy
     dateTimeFormatter: dd/MM/yyyy hh:mm:ss
+    bankName: Revolut
   security:
     jwt:
       secret: MySuperSecret69
-      expirationMs: 8400
+      expirationMs: 86400000
   card:
     ibanPrefix: "RO18BTRL"
   client:
@@ -47,5 +57,43 @@ app:
     userHistoryCollectionName: user_history
     cardHistoryCollectionName: card_history
     depositHistoryCollectionName: card_history
+    transferHistoryCollectionName: transfer_history
+server:
+  port: 8088
+
+---
+
+spring:
+  datasource:
+    username: root
+    password: tuddiroot
+    url: jdbc:mysql://localhost:3306/revolut
+  flyway:
+    user: root
+    password: tuddiroot
+    url: jdbc:mysql://localhost:3306/revolut
 server:
   port: 8080
+
+---
+
+spring:
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+---
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: appbanking079@gmail.com
+    password: nyvnigfbcnjubblf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

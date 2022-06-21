@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Business implements CsvWriteable {
+public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -29,9 +29,4 @@ public class Business implements CsvWriteable {
     @Column(name = "balance", nullable = false)
     private Float balance;
 
-
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + name + "," + cif + "," + balance.toString() + "\n";
-    }
 }

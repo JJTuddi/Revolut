@@ -16,7 +16,11 @@ const availableCurrencies = Object.keys(JSON.parse(fs_1.default.readFileSync(con
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)(config.corsConfig));
 const server = http_1.default.createServer(app);
-const io = new socket_io_1.Server(server);
+const io = new socket_io_1.Server(server, {
+    cors: {
+        origin: ["http://localhost:8080", "http://localhost:3000"]
+    }
+});
 let currency = new CurrencyRate_js_1.default(baseRates, config.baseCurrency, config.fluctuation, config.quotientRate);
 setInterval(() => {
     io.emit("latest-currency", (0, MapSerializer_js_1.default)(currency.fluctuate()));

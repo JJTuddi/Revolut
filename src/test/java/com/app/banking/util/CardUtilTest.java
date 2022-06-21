@@ -42,8 +42,13 @@ class CardUtilTest {
 
     @Test
     void getRandomIbann() {
-        System.out.println(cardUtil.getRandomIban("EUR"));
-        System.out.println(cardUtil.getRandomCardNumber());
+        for (int i = 0; i < 20; i++) {
+            for (String currency: List.of("EUR", "BTC", "RON", "USD", "XAU")) {
+                System.out.println(cardUtil.getRandomIban("EUR"));
+                System.out.println(cardUtil.getRandomCardNumber());
+                System.out.print("\n");
+            }
+        }
     }
 
 }

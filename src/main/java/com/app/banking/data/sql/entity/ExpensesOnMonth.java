@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ExpensesOnMonth implements CsvWriteable {
+public class ExpensesOnMonth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -35,9 +35,4 @@ public class ExpensesOnMonth implements CsvWriteable {
     @Column(name = "currentValue", nullable = false)
     private Float currentValue;
 
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + owner.getId().toString() + "," + expense.getId().toString() + ","
-                + onDate.toString() + "," + currentValue.toString() + "\n";
-    }
 }

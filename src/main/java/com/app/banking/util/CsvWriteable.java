@@ -4,4 +4,6 @@ public interface CsvWriteable {
 
     String getCsvLine();
 
+    String getCsvHeader();
+
 }

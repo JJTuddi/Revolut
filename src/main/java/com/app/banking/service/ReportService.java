@@ -1,9 +1,15 @@
 package com.app.banking.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.app.banking.helper.report.ReportType;
+import org.springframework.http.HttpHeaders;
 
-@Service
-@RequiredArgsConstructor
-public class ReportService {
+
+public interface ReportService {
+
+    byte[] export(String content);
+
+    ReportType getType();
+
+    HttpHeaders getHeaders();
+
 }

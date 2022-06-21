@@ -1,21 +1,22 @@
 package com.app.banking.data.dto.model;
 
-import com.app.banking.data.sql.entity.enums.ECardType;
 import lombok.*;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardTypeDto implements Serializable {
-    private ECardType name;
+
+    private final Float epsilonError = 0.000001f;
+    private String name;
     private String description;
     private Integer maxWithdrawal;
     private Float cashbackPercent;
-
-    private final Float epsilonError = 0.000001f;
+    private String color;
 
     @Override
     public boolean equals(Object o) {
@@ -33,6 +34,6 @@ public class CardTypeDto implements Serializable {
         return this.name.equals(c.getName())
                 && this.description.equals(c.getDescription())
                 && this.maxWithdrawal.equals(c.getMaxWithdrawal())
-                && Math.abs(this.cashbackPercent-c.getCashbackPercent())<this.epsilonError;
+                && Math.abs(this.cashbackPercent - c.getCashbackPercent()) < this.epsilonError;
     }
 }

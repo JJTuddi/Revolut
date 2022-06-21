@@ -149,7 +149,7 @@ public class CardServiceIntegrationTest {
 
     private CardType saveCardType(){
         return cardTypeRepository.save(CardType.builder()
-                .name(ECardType.GOLD)
+                .name("GOLD")
                 .description(randomString())
                 .maxWithdrawal(randomInteger())
                 .cashbackPercent(randomFloat())
@@ -158,7 +158,7 @@ public class CardServiceIntegrationTest {
 
     private CardStatus saveCardStatus(){
         return cardStatusRepository.save(CardStatus.builder()
-                .name(ECardStatus.FUNCTIONAL)
+                .name("FUNCTIONAL")
                 .description(randomString())
                 .build());
     }
