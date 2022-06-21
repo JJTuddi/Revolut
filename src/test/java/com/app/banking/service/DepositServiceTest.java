@@ -173,4 +173,28 @@ public class DepositServiceTest {
                 .interestRate(randomFloat())
                 .build();
     }
+
+    @Test
+    void findAll() {
+    }
+
+    @Test
+    void getMyDeposits() {
+    }
+
+    @Test
+    void allDepositsByOwner() {
+    }
+
+    @Test
+    void addDeposit() {
+    }
+
+    @Test
+    void update() {
+    }
+
+    @Test
+    void testDelete() {
+    }
 }

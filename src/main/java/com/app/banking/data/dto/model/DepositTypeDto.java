@@ -11,6 +11,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DepositTypeDto implements Serializable {
-    private EDepositType name;
+    private String name;
     private String description;
 }

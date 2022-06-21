@@ -72,4 +72,27 @@ public class UserControllerTest extends BaseControllerTest {
                 .build();
     }
 
+    @Test
+    void getMyDetails() {
+    }
+
+    @Test
+    void allUsers() {
+    }
+
+    @Test
+    void findById() {
+    }
+
+    @Test
+    void create() {
+    }
+
+    @Test
+    void update() {
+    }
+
+    @Test
+    void delete() {
+    }
 }

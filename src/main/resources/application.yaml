@@ -41,7 +41,7 @@ app:
       secret: MySuperSecret69
       expirationMs: 86400000
   card:
-    ibanPrefix: "RO18BTRL"
+    ibanPrefix: "RO18BTR"
   client:
     restTemplate:
       connectTimeout: 69420

@@ -17,9 +17,29 @@ const getCardReportsUrl = (type) => {
     return baseUrl + "/reports/my_cards/" + type;
 }
 
+const getMyContactsUrl = () => {
+    return baseUrl + "/contacts/my";
+}
+
+const getMyPendingContactsUrl = () => {
+    return baseUrl + "/contacts/my/pending";
+}
+
+const getTransferEndpoint = () => {
+    return baseUrl + "/pay/transfer"
+}
+
+const getMyDepositsUrl = () => {
+    return baseUrl + '/deposits/my';
+}
+
 export default {
     getAuthUrl,
     getDetailsUrl,
     getMyCardsUrl,
-    getCardReportsUrl
+    getMyContactsUrl,
+    getMyDepositsUrl,
+    getCardReportsUrl,
+    getTransferEndpoint,
+    getMyPendingContactsUrl,
 }

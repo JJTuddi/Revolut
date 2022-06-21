@@ -25,9 +25,9 @@ public class NewsScheduler {
     private final CurrencyClient currencyClient;
     private final UserRepository userRepository;
     private final OffersService offersService;
-    private NewsletterService newsletterService;
+    private final NewsletterService newsletterService;
 
-    @Scheduled(cron = "00 00 5,11,22 * * *")
+    @Scheduled(cron = "00 00/3 * * * *")
     public void notifyAboutCurrencies() {
         Map<String, Double> currencies = currencyClient.getCurrencies();
 
