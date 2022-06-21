@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -26,6 +27,10 @@ public class ServiceUtil {
 
     public String formatDateToString(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern(dateFormatter));
+    }
+
+    public String formatDateTimeToString(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern(dateTimeFormatter));
     }
 
     public String getBankName() {

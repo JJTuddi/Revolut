@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DepositType implements CsvWriteable {
+public class DepositType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -32,8 +32,4 @@ public class DepositType implements CsvWriteable {
     @Column(name = "interestRate", nullable = false)
     private Float interestRate;
 
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + name + "," + description + "," + interestRate.toString() + "\n";
-    }
 }

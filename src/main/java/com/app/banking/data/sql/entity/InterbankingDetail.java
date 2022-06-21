@@ -14,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InterbankingDetail implements CsvWriteable {
+public class InterbankingDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -48,9 +48,4 @@ public class InterbankingDetail implements CsvWriteable {
         return getClass().hashCode();
     }
 
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + bankName  + "," + ibanPrefix + "," + feesToTransfer.toString()  + "," +
-                endpointToCall + "\n";
-    }
 }

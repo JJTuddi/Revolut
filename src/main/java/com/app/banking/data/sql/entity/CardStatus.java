@@ -13,22 +13,17 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "card_status")
-public class CardStatus implements CsvWriteable {
+public class CardStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 16)
-    private ECardStatus name;
+    private String name;
 
     @Lob
     @Column(name = "description")
     private String description;
 
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + name.toString() + "," + description + "\n";
-    }
 }

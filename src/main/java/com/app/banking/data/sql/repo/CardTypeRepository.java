@@ -8,5 +8,6 @@ import java.util.Optional;
 
 public interface CardTypeRepository extends JpaRepository<CardType, Integer> {
 
-    Optional<CardType> findByNameLike(ECardType name);        //TODO test
+    Optional<CardType> findByNameLike(String name);        //TODO test
+
 }

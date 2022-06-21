@@ -1,9 +1,6 @@
 package com.app.banking.data.sql.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +9,12 @@ import javax.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Table(name = "flyway_schema_history")
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "flyway_schema_history")
 public class FlywaySchemaHistory {
     @Id
     @Column(name = "installed_rank", nullable = false)
@@ -46,6 +44,7 @@ public class FlywaySchemaHistory {
     @Column(name = "execution_time", nullable = false)
     private Integer executionTime;
 
+    @Builder.Default
     @Column(name = "success", nullable = false)
     private Boolean success = false;
 

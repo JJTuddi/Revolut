@@ -9,13 +9,6 @@ public interface CardMapper {
 
     Card cardDtoToCard(CardDto cardDto);
 
-    @Mappings({
-            @Mapping(target = "cardType.name", source = "cardType.name"),
-            @Mapping(target = "currentAmount", source = "currentAmount"),
-            @Mapping(target = "cvv", source = "cvv"),
-            @Mapping(target = "number", source = "number"),
-            @Mapping(target = "expirationDate", source = "expirationDate")
-    })
     CardDto cardToCardDto(Card card);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

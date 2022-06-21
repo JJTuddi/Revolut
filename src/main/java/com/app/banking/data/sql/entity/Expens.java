@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "expenses")
-public class Expens implements CsvWriteable {
+public class Expens {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -24,8 +24,4 @@ public class Expens implements CsvWriteable {
     @Column(name = "expectedAmount", nullable = false)
     private Float expectedAmount;
 
-    @Override
-    public String getCsvLine() {
-        return id.toString() + "," + name + "," + expectedAmount.toString() + "\n";
-    }
 }

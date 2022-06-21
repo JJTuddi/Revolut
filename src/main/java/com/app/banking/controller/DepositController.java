@@ -12,6 +12,7 @@ import static com.app.banking.URLMapping.*;
 @RestController
 @RequestMapping(DEPOSITS)
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "http://localhost:*")
 public class DepositController {
     private final DepositService depositService;
 

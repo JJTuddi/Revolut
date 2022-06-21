@@ -12,7 +12,6 @@ config.banks.forEach(bank => {
       app.put(`${bank.endpoint}/transfer`, (req, res) => {
             const { identifytoken, bankname } = req.headers;
             const { fromDetails } = req.body;
-            console.log("Pula " + bank.name + " - " + bank.prefixToken + " - " + " " + identifytoken + " " + JSON.stringify(req.headers));
             if (!identifytoken?.toUpperCase().startsWith(bank?.prefixToken.toUpperCase())) {
                   res.status(401).json({ message: "Wrong token! You are not authorized to communicate for transfers!" });
             }

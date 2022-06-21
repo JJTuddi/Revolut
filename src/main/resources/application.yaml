@@ -15,6 +15,23 @@ spring:
     jdbc:
       initialize-schema: always
 app:
+  mail:
+    enableSending: false
+    host: host
+    secure: true
+    service: service
+    user: user
+    pass: password
+    port: 465
+    sessionDebug: true
+  facebook:
+    graph:
+      baseUrl: https://graph.facebook.com/v14.0/me/feed
+      tokenName: access_token
+    page:
+      authToken: myToken
+  external:
+    baseUrl: http://localhost:3078
   serviceUtil:
     dateFormatter: dd/MM/yyyy
     dateTimeFormatter: dd/MM/yyyy hh:mm:ss

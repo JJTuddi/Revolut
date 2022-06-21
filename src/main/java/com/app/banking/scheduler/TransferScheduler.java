@@ -40,8 +40,7 @@ public class TransferScheduler {
     private final ServiceUtil serviceUtil;
     private final TransferHistoryTrack transferHistoryTrack;
 
-    @Scheduled(fixedRate = 60000) // Test Only
-//    @Scheduled(cron = "00 00 11 * * MON-SAT") // Every Day from Monday to Saturday at 11:00
+    @Scheduled(cron = "00 00 11 * * MON-SAT") // Every Day from Monday to Saturday at 11:00
     public void makeInterbankingTransfers() {
         List<Transfer> transfers = transferRepository.findAllByTransferStatus(TransferStatus.WAITING);
         transfers.forEach(transfer -> {

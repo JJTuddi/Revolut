@@ -1,21 +1,21 @@
 package com.app.banking.data.sql.entity;
 
 import com.app.banking.util.CsvWriteable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Entity
-@Table(name = "cards")
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "cards")
 public class Card implements CsvWriteable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +51,13 @@ public class Card implements CsvWriteable {
 
     @Override
     public String getCsvLine() {
-        return id.toString() + "," + owner.getId().toString() + "," + cardType.toString() + "," + currentAmount.toString()
-                + "," + cvv + "," + number + "," + expirationDate.toString() + "," + cardStatus.toString() + "\n";
+        return String.join(", ", List.of(owner.getEmail(), cardType.getCsvLine(), currentAmount.toString(),
+                cvv, number, expirationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), iban, cardStatus.getName()));
     }
+
+    @Override
+    public String getCsvHeader() {
+        return "owner email, " + cardType.getCsvHeader() + ", current amount, cvv, number, expiration date, iban, status";
+    }
+
 }

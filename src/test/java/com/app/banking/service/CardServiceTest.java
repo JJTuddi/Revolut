@@ -195,7 +195,7 @@ public class CardServiceTest {
 
     private CardType buildCardType() {
         return CardType.builder()
-                .name(ECardType.GOLD)
+                .name("GOLD")
                 .description(randomString())
                 .maxWithdrawal(randomInteger())
                 .cashbackPercent(randomFloat())
@@ -204,7 +204,7 @@ public class CardServiceTest {
 
     private CardStatus buildCardStatus() {
         return CardStatus.builder()
-                .name(ECardStatus.FUNCTIONAL)
+                .name("FUNCTIONAL")
                 .description(randomString())
                 .build();
     }

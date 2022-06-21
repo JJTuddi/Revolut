@@ -1,29 +1,28 @@
 package com.app.banking.data.sql.entity;
 
-import com.app.banking.data.sql.entity.enums.ECardType;
 import com.app.banking.util.CsvWriteable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "card_types")
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "card_types")
 public class CardType implements CsvWriteable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 16)
-    private ECardType name;
+    private String name;
 
     @Lob
     @Column(name = "description", nullable = false)
@@ -35,10 +34,18 @@ public class CardType implements CsvWriteable {
     @Column(name = "cashbackPercent", nullable = false)
     private Float cashbackPercent;
 
+    @Column(name = "color", nullable = false, length = 16)
+    private String color;
+
 
     @Override
     public String getCsvLine() {
-        return id.toString() + ","  + name.toString() + "," + description + "," + maxWithdrawal.toString() + ","
-                + cashbackPercent.toString() + "\n";
+        return String.join(", ", List.of(name, maxWithdrawal.toString(), cashbackPercent.toString()));
     }
+
+    @Override
+    public String getCsvHeader() {
+        return "cardType, maxWithdrawal, cashbackPercent";
+    }
+
 }

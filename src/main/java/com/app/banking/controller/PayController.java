@@ -14,6 +14,7 @@ import static com.app.banking.URLMapping.PAY;
 @RestController
 @RequestMapping(PAY)
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "http://localhost:*")
 public class PayController {
 
     private final PayService payService;

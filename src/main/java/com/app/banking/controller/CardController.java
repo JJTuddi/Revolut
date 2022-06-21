@@ -14,6 +14,7 @@ import static com.app.banking.URLMapping.*;
 @RestController
 @RequestMapping(CARDS)
 @RequiredArgsConstructor
+@CrossOrigin(originPatterns = "http://localhost:*")
 public class CardController {
 
     private final CardService cardService;

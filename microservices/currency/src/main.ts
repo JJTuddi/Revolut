@@ -13,7 +13,11 @@ const availableCurrencies = Object.keys(JSON.parse(fs.readFileSync(config.ratesF
 const app: Application = express();
 app.use(cors(config.corsConfig));
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:8080", "http://localhost:3000"]
+  }
+});
 
 let currency: CurrencyRate = new CurrencyRate(baseRates, config.baseCurrency, config.fluctuation, config.quotientRate);
 
